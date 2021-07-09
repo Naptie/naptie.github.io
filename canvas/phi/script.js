@@ -484,7 +484,6 @@ btnPlay.onclick = async function() {
 			backgroundImage = bgs[selectbg.value];
 			backgroundMusic = bgms[selectbgm.value];
 			stage.classList.remove("disabled");
-			stage.requestFullscreen().then(resizeCanvas);
 			this.value = "停止";
 			resizeImagebg();
 			loadBgm();
@@ -563,6 +562,7 @@ function draw() {
 	timeChart = Math.max(timeBgm - chart.offset, 0);
 	//重置画面
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	stage.requestFullscreen().then(resizeCanvas);
 
 	//遍历events
 	chart.judgeLineList.forEach((val, idx) => {
