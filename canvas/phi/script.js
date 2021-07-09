@@ -25,6 +25,7 @@ const charts = {};
 const csvLineData = [];
 const canvas = document.getElementById("canvas");
 const canvasbg = document.getElementById("canvas-bg");
+let songName = "songName";
 //调节画面尺寸
 let wlen, hlen, noteScale, lineScale, sx, sy, sw, sh, dx1, dy1, dw1, dh1, dx2, dy2, dw2, dh2; //背景图相关
 const aspectRatio = 16 / 9;
@@ -299,6 +300,7 @@ let chart, backgroundMusic, backgroundImage; //存放谱面
 //加载文件
 function loadFile(file) {
 	qwq2 = true;
+	songName = file.name.replace(".zip", "");
 	const reader = new FileReader();
 	reader.readAsArrayBuffer(file);
 	reader.onprogress = progress => { //显示加载文件进度
@@ -562,7 +564,8 @@ function draw() {
 	timeChart = Math.max(timeBgm - chart.offset, 0);
 	//重置画面
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	stage.requestFullscreen().then(resizeCanvas);
+	if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
+	else stage.requestFullscreen().then(resizeCanvas);
 
 	//遍历events
 	chart.judgeLineList.forEach((val, idx) => {
@@ -680,10 +683,10 @@ function draw() {
 	ctx.textAlign = "right";
 	ctx.fillText(`${score}`, canvas.width - padding, lineScale * 1.5);
 	ctx.font = `${lineScale*0.75}px Exo`;
-	ctx.fillText(document.getElementById("songLevel").value || "SP  Lv.?", canvas.width - padding, canvas.height - padding);
+	ctx.fillText(document.getElementById("songLevel").value || "SP Lv.?", canvas.width - padding, canvas.height - padding);
 	ctx.drawImage(res.SongsNameBar, padding, canvas.height - padding - lineScale * 0.6, lineScale * 0.14, lineScale * 0.72);
 	ctx.textAlign = "left";
-	ctx.fillText(document.getElementById("songName").value || "songName", padding + lineScale * 0.45, canvas.height - padding);
+	ctx.fillText(document.getElementById("songName").value || songName, padding + lineScale * 0.45, canvas.height - padding);
 	if (combo > 2) {
 		ctx.textAlign = "center";
 		ctx.font = `${lineScale*1.5}px Exo`;
