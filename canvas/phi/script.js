@@ -685,7 +685,7 @@ function draw() {
 	ctx.textAlign = "right";
 	ctx.fillText(`${score}`, canvas.width - padding, lineScale * 1.5);
 	ctx.font = `${lineScale*0.75}px Exo`;
-	ctx.fillText(document.getElementById("songLevel").value || "SP Lv.?", canvas.width - padding, canvas.height - padding);
+	ctx.fillText(document.getElementById("songLevel").value || "SP  Lv.?", canvas.width - padding, canvas.height - padding);
 	ctx.drawImage(res.SongsNameBar, padding, canvas.height - padding - lineScale * 0.6, lineScale * 0.14, lineScale * 0.72);
 	ctx.textAlign = "left";
 	ctx.fillText(document.getElementById("songName").value || songName, padding + lineScale * 0.45, canvas.height - padding);
