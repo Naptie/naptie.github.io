@@ -474,6 +474,8 @@ btnPlay.onclick = async function() {
 	btnPause.value = "暂停";
 	switch (this.value) {
 		case "播放":
+			if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
+			else stage.requestFullscreen().then(resizeCanvas);
 			chart = JSON.parse(JSON.stringify(charts[selectchart.value])); //fuck
 			for (const i of csvLineData) {
 				if (selectchart.value == i[0]) {
@@ -486,8 +488,6 @@ btnPlay.onclick = async function() {
 			backgroundImage = bgs[selectbg.value];
 			backgroundMusic = bgms[selectbgm.value];
 			stage.classList.remove("disabled");
-			if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
-			else stage.requestFullscreen().then(resizeCanvas);
 			this.value = "停止";
 			resizeImagebg();
 			loadBgm();
