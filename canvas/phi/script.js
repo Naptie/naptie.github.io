@@ -476,7 +476,7 @@ btnPlay.onclick = async function() {
 		case "播放":
 			if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
 			else stage.requestFullscreen().then(resizeCanvas);
-			new Promise((resolve) => setTimeout(resolve, 300)).then(async () => {
+			new Promise((resolve) => setTimeout(resolve, 100)).then(async () => {
 				chart = JSON.parse(JSON.stringify(charts[selectchart.value])); //fuck
 				for (const i of csvLineData) {
 					if (selectchart.value == i[0]) {
