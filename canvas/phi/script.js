@@ -389,7 +389,7 @@ function loadFile(file) {
 
 			function loading(num) {
 				out.className = "accept";
-				out.innerText = `读取文件：${Math.floor(num/zipData.length * 100)}%`;
+				out.innerText = `读取 ${songName} 的文件：${Math.floor(num/zipData.length * 100)}%`;
 				if (num == zipData.length) {
 					if (selectchart.children.length == 0) {
 						out.className = "error";
@@ -486,6 +486,8 @@ btnPlay.onclick = async function() {
 			backgroundImage = bgs[selectbg.value];
 			backgroundMusic = bgms[selectbgm.value];
 			stage.classList.remove("disabled");
+			if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
+			else stage.requestFullscreen().then(resizeCanvas);
 			this.value = "停止";
 			resizeImagebg();
 			loadBgm();
@@ -564,8 +566,6 @@ function draw() {
 	timeChart = Math.max(timeBgm - chart.offset, 0);
 	//重置画面
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
-	else stage.requestFullscreen().then(resizeCanvas);
 
 	//遍历events
 	chart.judgeLineList.forEach((val, idx) => {
