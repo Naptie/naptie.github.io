@@ -474,22 +474,22 @@ btnPlay.onclick = async function() {
 	btnPause.value = "暂停";
 	switch (this.value) {
 		case "播放":
+			chart = JSON.parse(JSON.stringify(charts[selectchart.value])); //fuck
+			for (const i of csvLineData) {
+				if (selectchart.value == i[0]) {
+					chart.judgeLineList[i[1]].image = await createImageBitmap(imgShader(bgs[i[2]], "#feffa9"));
+					chart.judgeLineList[i[1]].imageH = Number(i[3]);
+					chart.judgeLineList[i[1]].imageW = Number(i[4]);
+					chart.judgeLineList[i[1]].imageB = Number(i[5]);
+				}
+			}
+			backgroundImage = bgs[selectbg.value];
+			backgroundMusic = bgms[selectbgm.value];
+			stage.classList.remove("disabled");
+			this.value = "停止";
 			if (document.fullscreenElement) document.exitFullscreen().then(resizeCanvas);
 			else stage.requestFullscreen().then(resizeCanvas);
-			new Promise((resolve) => setTimeout(resolve, 50)).then(async () => {
-				chart = JSON.parse(JSON.stringify(charts[selectchart.value])); //fuck
-				for (const i of csvLineData) {
-					if (selectchart.value == i[0]) {
-						chart.judgeLineList[i[1]].image = await createImageBitmap(imgShader(bgs[i[2]], "#feffa9"));
-						chart.judgeLineList[i[1]].imageH = Number(i[3]);
-						chart.judgeLineList[i[1]].imageW = Number(i[4]);
-						chart.judgeLineList[i[1]].imageB = Number(i[5]);
-					}
-				}
-				backgroundImage = bgs[selectbg.value];
-				backgroundMusic = bgms[selectbgm.value];
-				stage.classList.remove("disabled");
-				this.value = "停止";
+			new Promise((resolve) => setTimeout(resolve, 50)).then(() => {
 				resizeImagebg();
 				loadBgm();
 				draw();
