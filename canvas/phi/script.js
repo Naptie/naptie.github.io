@@ -52,7 +52,7 @@ function playDemo() {
 	};
 }
 //pec假note
-const showFakeNotes = false;
+const showFakeNotes = true;
 //全屏相关
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
@@ -484,6 +484,7 @@ btnPlay.onclick = async function() {
 			backgroundImage = bgs[selectbg.value];
 			backgroundMusic = bgms[selectbgm.value];
 			stage.classList.remove("disabled");
+			stage.requestFullscreen().then(resizeCanvas);
 			this.value = "停止";
 			resizeImagebg();
 			loadBgm();
